@@ -5,7 +5,7 @@ namespace Programming.Core
     public class Settings
     {
         private static Settings _instance;
-        
+
         public readonly int K = 3;
         public readonly double MaxAngle = Math.PI;
         public readonly double MinAngle = 0;

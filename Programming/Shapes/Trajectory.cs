@@ -5,20 +5,24 @@ namespace Programming.Shapes
 {
     public class Trajectory
     {
-        private LissajousFigure Figure { get; } = new LissajousFigure();
+        private protected LissajousFigure Figure { get; } = new LissajousFigure();
         public double Scale { get; set; }
 
-
-        public void Draw(PictureBox paintBox, PaintEventArgs e)
+        private protected void SetFigure(Control paintBox)
         {
             Figure.Center = new Point { X = paintBox.Width / 2, Y = paintBox.Height / 2 };
             Figure.Radius = paintBox.Width < paintBox.Height
                 ? paintBox.Width / 2
                 : paintBox.Height / 2;
+            Figure.Scale = Scale;
+        }
 
-            var points = Figure.GetPoints(Scale);
+        public void Draw(PictureBox paintBox, PaintEventArgs e)
+        {
+            SetFigure(paintBox);
 
-            e.Graphics.Clear(Color.White);
+            var points = Figure.GetPoints();
+
             e.Graphics.DrawPolygon(new Pen(Color.Black, 4), points);
         }
     }

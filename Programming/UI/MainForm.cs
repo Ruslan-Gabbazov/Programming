@@ -1,13 +1,16 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Timers;
 using System.Windows.Forms;
 using Programming.Shapes;
+using Timer = System.Timers.Timer;
 
 namespace Programming.UI
 {
     public partial class MainForm : Form
     {
+        private readonly MovingPointTrajectory _movingPoint = new MovingPointTrajectory();
         private readonly Trajectory _trajectory = new Trajectory();
 
         private Label AuthorLabel;
@@ -21,7 +24,9 @@ namespace Programming.UI
         private TrackBar FigureSize;
         private Label FigureSizeLabel;
         private Button FigureSwichButton;
-        private System.Windows.Forms.PictureBox PaintBox;
+
+        private Timer MovingPointTimer;
+        private PictureBox PaintBox;
 
         private TrackBar TrajectorySize;
         private Label TrajectorySizeLabel;
@@ -33,215 +38,240 @@ namespace Programming.UI
         }
 
         /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
+        ///     Required method for Designer support - do not modify
+        ///     the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            this.TrajectorySize = new System.Windows.Forms.TrackBar();
-            this.TrajectorySizeLabel = new System.Windows.Forms.Label();
-            this.TrajectorySpeed = new System.Windows.Forms.TrackBar();
-            this.FigureMoveSpeedLabel = new System.Windows.Forms.Label();
-            this.FigureSizeLabel = new System.Windows.Forms.Label();
-            this.FigureSize = new System.Windows.Forms.TrackBar();
-            this.FigureBreathingSpeedLabel = new System.Windows.Forms.Label();
-            this.FigureBreathSpeed = new System.Windows.Forms.TrackBar();
-            this.ColorSwichButton = new System.Windows.Forms.Button();
-            this.FigureSwichButton = new System.Windows.Forms.Button();
-            this.ControlPanel = new System.Windows.Forms.Panel();
-            this.AuthorLabel = new System.Windows.Forms.Label();
-            this.ConfigLabel = new System.Windows.Forms.Label();
-            this.PaintBox = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.TrajectorySize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TrajectorySpeed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FigureSize)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FigureBreathSpeed)).BeginInit();
-            this.ControlPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PaintBox)).BeginInit();
-            this.SuspendLayout();
+            TrajectorySize = new TrackBar();
+            TrajectorySizeLabel = new Label();
+            TrajectorySpeed = new TrackBar();
+            FigureMoveSpeedLabel = new Label();
+            FigureSizeLabel = new Label();
+            FigureSize = new TrackBar();
+            FigureBreathingSpeedLabel = new Label();
+            FigureBreathSpeed = new TrackBar();
+            ColorSwichButton = new Button();
+            FigureSwichButton = new Button();
+            ControlPanel = new Panel();
+            AuthorLabel = new Label();
+            ConfigLabel = new Label();
+            PaintBox = new PictureBox();
+            MovingPointTimer = new Timer();
+            ((ISupportInitialize)TrajectorySize).BeginInit();
+            ((ISupportInitialize)TrajectorySpeed).BeginInit();
+            ((ISupportInitialize)FigureSize).BeginInit();
+            ((ISupportInitialize)FigureBreathSpeed).BeginInit();
+            ControlPanel.SuspendLayout();
+            ((ISupportInitialize)PaintBox).BeginInit();
+            ((ISupportInitialize)MovingPointTimer).BeginInit();
+            SuspendLayout();
             // 
             // TrajectorySize
             // 
-            this.TrajectorySize.Location = new System.Drawing.Point(25, 100);
-            this.TrajectorySize.Margin = new System.Windows.Forms.Padding(4);
-            this.TrajectorySize.Maximum = 20;
-            this.TrajectorySize.Name = "TrajectorySize";
-            this.TrajectorySize.Size = new System.Drawing.Size(350, 56);
-            this.TrajectorySize.TabIndex = 0;
-            this.TrajectorySize.Value = 10;
-            this.TrajectorySize.Scroll += new System.EventHandler(this.TrajectorySize_Scroll);
+            TrajectorySize.Location = new Point(25, 100);
+            TrajectorySize.Margin = new Padding(4);
+            TrajectorySize.Maximum = 20;
+            TrajectorySize.Name = "TrajectorySize";
+            TrajectorySize.Size = new Size(350, 56);
+            TrajectorySize.TabIndex = 0;
+            TrajectorySize.Value = 10;
+            TrajectorySize.Scroll += TrajectorySize_Scroll;
             // 
             // TrajectorySizeLabel
             // 
-            this.TrajectorySizeLabel.AutoSize = true;
-            this.TrajectorySizeLabel.Location = new System.Drawing.Point(130, 64);
-            this.TrajectorySizeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.TrajectorySizeLabel.Name = "TrajectorySizeLabel";
-            this.TrajectorySizeLabel.Size = new System.Drawing.Size(138, 17);
-            this.TrajectorySizeLabel.TabIndex = 1;
-            this.TrajectorySizeLabel.Text = "Размер траектории";
+            TrajectorySizeLabel.AutoSize = true;
+            TrajectorySizeLabel.Location = new Point(130, 64);
+            TrajectorySizeLabel.Margin = new Padding(4, 0, 4, 0);
+            TrajectorySizeLabel.Name = "TrajectorySizeLabel";
+            TrajectorySizeLabel.Size = new Size(138, 17);
+            TrajectorySizeLabel.TabIndex = 1;
+            TrajectorySizeLabel.Text = "Размер траектории";
             // 
             // TrajectorySpeed
             // 
-            this.TrajectorySpeed.Location = new System.Drawing.Point(25, 200);
-            this.TrajectorySpeed.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.TrajectorySpeed.Maximum = 20;
-            this.TrajectorySpeed.Name = "TrajectorySpeed";
-            this.TrajectorySpeed.Size = new System.Drawing.Size(350, 56);
-            this.TrajectorySpeed.TabIndex = 2;
-            this.TrajectorySpeed.Value = 1;
+            TrajectorySpeed.Location = new Point(25, 200);
+            TrajectorySpeed.Margin = new Padding(3, 2, 3, 2);
+            TrajectorySpeed.Maximum = 20;
+            TrajectorySpeed.Name = "TrajectorySpeed";
+            TrajectorySpeed.Size = new Size(350, 56);
+            TrajectorySpeed.TabIndex = 2;
+            TrajectorySpeed.Value = 10;
+            TrajectorySpeed.Scroll += TrajectorySpeed_Scroll;
             // 
             // FigureMoveSpeedLabel
             // 
-            this.FigureMoveSpeedLabel.AutoSize = true;
-            this.FigureMoveSpeedLabel.Location = new System.Drawing.Point(40, 160);
-            this.FigureMoveSpeedLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.FigureMoveSpeedLabel.Name = "FigureMoveSpeedLabel";
-            this.FigureMoveSpeedLabel.Size = new System.Drawing.Size(319, 17);
-            this.FigureMoveSpeedLabel.TabIndex = 3;
-            this.FigureMoveSpeedLabel.Text = "Скорость перемещения фигуры по траектории";
+            FigureMoveSpeedLabel.AutoSize = true;
+            FigureMoveSpeedLabel.Location = new Point(40, 160);
+            FigureMoveSpeedLabel.Margin = new Padding(4, 0, 4, 0);
+            FigureMoveSpeedLabel.Name = "FigureMoveSpeedLabel";
+            FigureMoveSpeedLabel.Size = new Size(319, 17);
+            FigureMoveSpeedLabel.TabIndex = 3;
+            FigureMoveSpeedLabel.Text = "Скорость перемещения фигуры по траектории";
             // 
             // FigureSizeLabel
             // 
-            this.FigureSizeLabel.AutoSize = true;
-            this.FigureSizeLabel.Location = new System.Drawing.Point(143, 258);
-            this.FigureSizeLabel.Name = "FigureSizeLabel";
-            this.FigureSizeLabel.Size = new System.Drawing.Size(110, 17);
-            this.FigureSizeLabel.TabIndex = 4;
-            this.FigureSizeLabel.Text = "Размер фигуры";
+            FigureSizeLabel.AutoSize = true;
+            FigureSizeLabel.Location = new Point(143, 258);
+            FigureSizeLabel.Name = "FigureSizeLabel";
+            FigureSizeLabel.Size = new Size(110, 17);
+            FigureSizeLabel.TabIndex = 4;
+            FigureSizeLabel.Text = "Размер фигуры";
             // 
             // FigureSize
             // 
-            this.FigureSize.Location = new System.Drawing.Point(25, 300);
-            this.FigureSize.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.FigureSize.Name = "FigureSize";
-            this.FigureSize.Size = new System.Drawing.Size(350, 56);
-            this.FigureSize.TabIndex = 5;
-            this.FigureSize.Value = 5;
+            FigureSize.Location = new Point(25, 300);
+            FigureSize.Margin = new Padding(3, 2, 3, 2);
+            FigureSize.Name = "FigureSize";
+            FigureSize.Size = new Size(350, 56);
+            FigureSize.TabIndex = 5;
+            FigureSize.Value = 5;
             // 
             // FigureBreathingSpeedLabel
             // 
-            this.FigureBreathingSpeedLabel.AutoSize = true;
-            this.FigureBreathingSpeedLabel.Location = new System.Drawing.Point(110, 358);
-            this.FigureBreathingSpeedLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.FigureBreathingSpeedLabel.Name = "FigureBreathingSpeedLabel";
-            this.FigureBreathingSpeedLabel.Size = new System.Drawing.Size(182, 17);
-            this.FigureBreathingSpeedLabel.TabIndex = 6;
-            this.FigureBreathingSpeedLabel.Text = "Скорость дыхания фигуры";
+            FigureBreathingSpeedLabel.AutoSize = true;
+            FigureBreathingSpeedLabel.Location = new Point(110, 358);
+            FigureBreathingSpeedLabel.Margin = new Padding(4, 0, 4, 0);
+            FigureBreathingSpeedLabel.Name = "FigureBreathingSpeedLabel";
+            FigureBreathingSpeedLabel.Size = new Size(182, 17);
+            FigureBreathingSpeedLabel.TabIndex = 6;
+            FigureBreathingSpeedLabel.Text = "Скорость дыхания фигуры";
             // 
             // FigureBreathSpeed
             // 
-            this.FigureBreathSpeed.Location = new System.Drawing.Point(25, 400);
-            this.FigureBreathSpeed.Margin = new System.Windows.Forms.Padding(4);
-            this.FigureBreathSpeed.Name = "FigureBreathSpeed";
-            this.FigureBreathSpeed.Size = new System.Drawing.Size(350, 56);
-            this.FigureBreathSpeed.TabIndex = 7;
-            this.FigureBreathSpeed.Value = 1;
+            FigureBreathSpeed.Location = new Point(25, 400);
+            FigureBreathSpeed.Margin = new Padding(4);
+            FigureBreathSpeed.Name = "FigureBreathSpeed";
+            FigureBreathSpeed.Size = new Size(350, 56);
+            FigureBreathSpeed.TabIndex = 7;
+            FigureBreathSpeed.Value = 1;
             // 
             // ColorSwichButton
             // 
-            this.ColorSwichButton.Location = new System.Drawing.Point(99, 476);
-            this.ColorSwichButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.ColorSwichButton.Name = "ColorSwichButton";
-            this.ColorSwichButton.Size = new System.Drawing.Size(210, 25);
-            this.ColorSwichButton.TabIndex = 8;
-            this.ColorSwichButton.Text = "Изменить цвета";
-            this.ColorSwichButton.UseVisualStyleBackColor = true;
+            ColorSwichButton.Location = new Point(99, 476);
+            ColorSwichButton.Margin = new Padding(3, 2, 3, 2);
+            ColorSwichButton.Name = "ColorSwichButton";
+            ColorSwichButton.Size = new Size(210, 25);
+            ColorSwichButton.TabIndex = 8;
+            ColorSwichButton.Text = "Изменить цвета";
+            ColorSwichButton.UseVisualStyleBackColor = true;
             // 
             // FigureSwichButton
             // 
-            this.FigureSwichButton.Location = new System.Drawing.Point(99, 516);
-            this.FigureSwichButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.FigureSwichButton.Name = "FigureSwichButton";
-            this.FigureSwichButton.Size = new System.Drawing.Size(210, 26);
-            this.FigureSwichButton.TabIndex = 9;
-            this.FigureSwichButton.Text = "Изменить фигуру";
-            this.FigureSwichButton.UseVisualStyleBackColor = true;
+            FigureSwichButton.Location = new Point(99, 516);
+            FigureSwichButton.Margin = new Padding(3, 2, 3, 2);
+            FigureSwichButton.Name = "FigureSwichButton";
+            FigureSwichButton.Size = new Size(210, 26);
+            FigureSwichButton.TabIndex = 9;
+            FigureSwichButton.Text = "Изменить фигуру";
+            FigureSwichButton.UseVisualStyleBackColor = true;
             // 
             // ControlPanel
             // 
-            this.ControlPanel.Controls.Add(this.AuthorLabel);
-            this.ControlPanel.Controls.Add(this.ConfigLabel);
-            this.ControlPanel.Controls.Add(this.FigureSwichButton);
-            this.ControlPanel.Controls.Add(this.ColorSwichButton);
-            this.ControlPanel.Controls.Add(this.FigureBreathSpeed);
-            this.ControlPanel.Controls.Add(this.FigureBreathingSpeedLabel);
-            this.ControlPanel.Controls.Add(this.FigureSize);
-            this.ControlPanel.Controls.Add(this.FigureSizeLabel);
-            this.ControlPanel.Controls.Add(this.FigureMoveSpeedLabel);
-            this.ControlPanel.Controls.Add(this.TrajectorySpeed);
-            this.ControlPanel.Controls.Add(this.TrajectorySizeLabel);
-            this.ControlPanel.Controls.Add(this.TrajectorySize);
-            this.ControlPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.ControlPanel.Location = new System.Drawing.Point(782, 0);
-            this.ControlPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.ControlPanel.Name = "ControlPanel";
-            this.ControlPanel.Size = new System.Drawing.Size(400, 628);
-            this.ControlPanel.TabIndex = 2;
+            ControlPanel.Controls.Add(AuthorLabel);
+            ControlPanel.Controls.Add(ConfigLabel);
+            ControlPanel.Controls.Add(FigureSwichButton);
+            ControlPanel.Controls.Add(ColorSwichButton);
+            ControlPanel.Controls.Add(FigureBreathSpeed);
+            ControlPanel.Controls.Add(FigureBreathingSpeedLabel);
+            ControlPanel.Controls.Add(FigureSize);
+            ControlPanel.Controls.Add(FigureSizeLabel);
+            ControlPanel.Controls.Add(FigureMoveSpeedLabel);
+            ControlPanel.Controls.Add(TrajectorySpeed);
+            ControlPanel.Controls.Add(TrajectorySizeLabel);
+            ControlPanel.Controls.Add(TrajectorySize);
+            ControlPanel.Dock = DockStyle.Right;
+            ControlPanel.Location = new Point(782, 0);
+            ControlPanel.Margin = new Padding(4);
+            ControlPanel.Name = "ControlPanel";
+            ControlPanel.Size = new Size(400, 628);
+            ControlPanel.TabIndex = 2;
             // 
             // AuthorLabel
             // 
-            this.AuthorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.AuthorLabel.AutoSize = true;
-            this.AuthorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AuthorLabel.Location = new System.Drawing.Point(224, 579);
-            this.AuthorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.AuthorLabel.Name = "AuthorLabel";
-            this.AuthorLabel.Size = new System.Drawing.Size(151, 40);
-            this.AuthorLabel.TabIndex = 11;
-            this.AuthorLabel.Text = "Габбазов Руслан\r\nГруппа 4197";
+            AuthorLabel.Anchor = AnchorStyles.Bottom |
+                                 AnchorStyles.Right;
+            AuthorLabel.AutoSize = true;
+            AuthorLabel.Font = new Font("Microsoft Sans Serif", 10.2F,
+                FontStyle.Italic, GraphicsUnit.Point, 204);
+            AuthorLabel.Location = new Point(224, 579);
+            AuthorLabel.Margin = new Padding(4, 0, 4, 0);
+            AuthorLabel.Name = "AuthorLabel";
+            AuthorLabel.Size = new Size(151, 40);
+            AuthorLabel.TabIndex = 11;
+            AuthorLabel.Text = "Габбазов Руслан\r\nГруппа 4197";
             // 
             // ConfigLabel
             // 
-            this.ConfigLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.ConfigLabel.AutoSize = true;
-            this.ConfigLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ConfigLabel.Location = new System.Drawing.Point(124, 21);
-            this.ConfigLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.ConfigLabel.Name = "ConfigLabel";
-            this.ConfigLabel.Size = new System.Drawing.Size(144, 20);
-            this.ConfigLabel.TabIndex = 10;
-            this.ConfigLabel.Text = "Конфигурация";
+            ConfigLabel.Anchor = AnchorStyles.Top;
+            ConfigLabel.AutoSize = true;
+            ConfigLabel.Font = new Font("Microsoft Sans Serif", 10.2F,
+                FontStyle.Bold, GraphicsUnit.Point, 204);
+            ConfigLabel.Location = new Point(124, 21);
+            ConfigLabel.Margin = new Padding(4, 0, 4, 0);
+            ConfigLabel.Name = "ConfigLabel";
+            ConfigLabel.Size = new Size(144, 20);
+            ConfigLabel.TabIndex = 10;
+            ConfigLabel.Text = "Конфигурация";
             // 
             // PaintBox
             // 
-            this.PaintBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-            this.PaintBox.BackColor = System.Drawing.Color.FloralWhite;
-            this.PaintBox.Location = new System.Drawing.Point(0, 0);
-            this.PaintBox.Margin = new System.Windows.Forms.Padding(4);
-            this.PaintBox.Name = "PaintBox";
-            this.PaintBox.Size = new System.Drawing.Size(774, 628);
-            this.PaintBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.PaintBox.TabIndex = 3;
-            this.PaintBox.TabStop = false;
-            this.PaintBox.Paint += new System.Windows.Forms.PaintEventHandler(this.PaintBox_Paint);
+            PaintBox.Anchor =
+                AnchorStyles.Top |
+                AnchorStyles.Bottom |
+                AnchorStyles.Left |
+                AnchorStyles.Right;
+            PaintBox.BackColor = Color.FloralWhite;
+            PaintBox.Location = new Point(0, 0);
+            PaintBox.Margin = new Padding(4);
+            PaintBox.Name = "PaintBox";
+            PaintBox.Size = new Size(774, 628);
+            PaintBox.SizeMode = PictureBoxSizeMode.CenterImage;
+            PaintBox.TabIndex = 3;
+            PaintBox.TabStop = false;
+            PaintBox.Paint += PaintBox_Paint;
+            // 
+            // MovingPointTimer
+            // 
+            MovingPointTimer.Enabled = true;
+            MovingPointTimer.Interval = 40D;
+            MovingPointTimer.SynchronizingObject = this;
+            MovingPointTimer.Elapsed += MovingPointTimer_Elapsed;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1182, 628);
-            this.Controls.Add(this.PaintBox);
-            this.Controls.Add(this.ControlPanel);
-            this.MinimumSize = new System.Drawing.Size(1200, 675);
-            this.Name = "MainForm";
-            this.Text = "Programming";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.MainForm_Paint);
-            this.Resize += new System.EventHandler(this.MainForm_Resize);
-            ((System.ComponentModel.ISupportInitialize)(this.TrajectorySize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TrajectorySpeed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FigureSize)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FigureBreathSpeed)).EndInit();
-            this.ControlPanel.ResumeLayout(false);
-            this.ControlPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PaintBox)).EndInit();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new SizeF(120F, 120F);
+            AutoScaleMode = AutoScaleMode.Dpi;
+            ClientSize = new Size(1182, 628);
+            Controls.Add(PaintBox);
+            Controls.Add(ControlPanel);
+            MinimumSize = new Size(1200, 675);
+            Name = "MainForm";
+            Text = "Programming";
+            Paint += MainForm_Paint;
+            Resize += MainForm_Resize;
+            ((ISupportInitialize)TrajectorySize).EndInit();
+            ((ISupportInitialize)TrajectorySpeed).EndInit();
+            ((ISupportInitialize)FigureSize).EndInit();
+            ((ISupportInitialize)FigureBreathSpeed).EndInit();
+            ControlPanel.ResumeLayout(false);
+            ControlPanel.PerformLayout();
+            ((ISupportInitialize)PaintBox).EndInit();
+            ((ISupportInitialize)MovingPointTimer).EndInit();
+            ResumeLayout(false);
         }
+
 
         private void PaintBox_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.Clear(Color.White);
+
             _trajectory.Scale = TrajectorySize.Value / (double)(TrajectorySize.Maximum - TrajectorySize.Minimum);
             _trajectory.Draw(PaintBox, e);
+
+            _movingPoint.Scale = TrajectorySize.Value / (double)(TrajectorySize.Maximum - TrajectorySize.Minimum);
+            _movingPoint.PointSpeed = TrajectorySpeed.Value / 100d;
+            _movingPoint.Draw(PaintBox, e);
         }
 
         private void MainForm_Resize(object sender, EventArgs e)
@@ -255,6 +285,16 @@ namespace Programming.UI
         }
 
         private void TrajectorySize_Scroll(object sender, EventArgs e)
+        {
+            Invalidate();
+        }
+
+        private void TrajectorySpeed_Scroll(object sender, EventArgs e)
+        {
+            Invalidate();
+        }
+
+        private void MovingPointTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             Invalidate();
         }
