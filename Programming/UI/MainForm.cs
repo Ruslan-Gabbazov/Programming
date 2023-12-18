@@ -11,6 +11,7 @@ namespace Programming.UI
     public partial class MainForm : Form
     {
         private readonly MovingPointTrajectory _movingPoint = new MovingPointTrajectory();
+        private readonly MovingFigureTrajectory _movingFigure = new MovingFigureTrajectory();
         private readonly Trajectory _trajectory = new Trajectory();
 
         private Label AuthorLabel;
@@ -38,8 +39,8 @@ namespace Programming.UI
         }
 
         /// <summary>
-        ///     Required method for Designer support - do not modify
-        ///     the contents of this method with the code editor.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
@@ -76,7 +77,7 @@ namespace Programming.UI
             TrajectorySize.Size = new Size(350, 56);
             TrajectorySize.TabIndex = 0;
             TrajectorySize.Value = 10;
-            TrajectorySize.Scroll += TrajectorySize_Scroll;
+            TrajectorySize.Scroll += new EventHandler(TrajectorySize_Scroll);
             // 
             // TrajectorySizeLabel
             // 
@@ -97,7 +98,7 @@ namespace Programming.UI
             TrajectorySpeed.Size = new Size(350, 56);
             TrajectorySpeed.TabIndex = 2;
             TrajectorySpeed.Value = 10;
-            TrajectorySpeed.Scroll += TrajectorySpeed_Scroll;
+            TrajectorySpeed.Scroll += new EventHandler(TrajectorySpeed_Scroll);
             // 
             // FigureMoveSpeedLabel
             // 
@@ -122,10 +123,12 @@ namespace Programming.UI
             // 
             FigureSize.Location = new Point(25, 300);
             FigureSize.Margin = new Padding(3, 2, 3, 2);
+            FigureSize.Maximum = 20;
             FigureSize.Name = "FigureSize";
             FigureSize.Size = new Size(350, 56);
             FigureSize.TabIndex = 5;
-            FigureSize.Value = 5;
+            FigureSize.Value = 10;
+            FigureSize.Scroll += new EventHandler(FigureSize_Scroll);
             // 
             // FigureBreathingSpeedLabel
             // 
@@ -189,11 +192,9 @@ namespace Programming.UI
             // 
             // AuthorLabel
             // 
-            AuthorLabel.Anchor = AnchorStyles.Bottom |
-                                 AnchorStyles.Right;
+            AuthorLabel.Anchor = (AnchorStyles)(AnchorStyles.Bottom | AnchorStyles.Right);
             AuthorLabel.AutoSize = true;
-            AuthorLabel.Font = new Font("Microsoft Sans Serif", 10.2F,
-                FontStyle.Italic, GraphicsUnit.Point, 204);
+            AuthorLabel.Font = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Italic, GraphicsUnit.Point, (byte)204);
             AuthorLabel.Location = new Point(224, 579);
             AuthorLabel.Margin = new Padding(4, 0, 4, 0);
             AuthorLabel.Name = "AuthorLabel";
@@ -205,8 +206,7 @@ namespace Programming.UI
             // 
             ConfigLabel.Anchor = AnchorStyles.Top;
             ConfigLabel.AutoSize = true;
-            ConfigLabel.Font = new Font("Microsoft Sans Serif", 10.2F,
-                FontStyle.Bold, GraphicsUnit.Point, 204);
+            ConfigLabel.Font = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Bold, GraphicsUnit.Point, (byte)204);
             ConfigLabel.Location = new Point(124, 21);
             ConfigLabel.Margin = new Padding(4, 0, 4, 0);
             ConfigLabel.Name = "ConfigLabel";
@@ -217,10 +217,7 @@ namespace Programming.UI
             // PaintBox
             // 
             PaintBox.Anchor =
-                AnchorStyles.Top |
-                AnchorStyles.Bottom |
-                AnchorStyles.Left |
-                AnchorStyles.Right;
+                (AnchorStyles)(AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right);
             PaintBox.BackColor = Color.FloralWhite;
             PaintBox.Location = new Point(0, 0);
             PaintBox.Margin = new Padding(4);
@@ -229,14 +226,14 @@ namespace Programming.UI
             PaintBox.SizeMode = PictureBoxSizeMode.CenterImage;
             PaintBox.TabIndex = 3;
             PaintBox.TabStop = false;
-            PaintBox.Paint += PaintBox_Paint;
+            PaintBox.Paint += new PaintEventHandler(PaintBox_Paint);
             // 
             // MovingPointTimer
             // 
             MovingPointTimer.Enabled = true;
             MovingPointTimer.Interval = 40D;
             MovingPointTimer.SynchronizingObject = this;
-            MovingPointTimer.Elapsed += MovingPointTimer_Elapsed;
+            MovingPointTimer.Elapsed += new ElapsedEventHandler(MovingPointTimer_Elapsed);
             // 
             // MainForm
             // 
@@ -248,8 +245,8 @@ namespace Programming.UI
             MinimumSize = new Size(1200, 675);
             Name = "MainForm";
             Text = "Programming";
-            Paint += MainForm_Paint;
-            Resize += MainForm_Resize;
+            Paint += new PaintEventHandler(MainForm_Paint);
+            Resize += new EventHandler(MainForm_Resize);
             ((ISupportInitialize)TrajectorySize).EndInit();
             ((ISupportInitialize)TrajectorySpeed).EndInit();
             ((ISupportInitialize)FigureSize).EndInit();
@@ -272,6 +269,11 @@ namespace Programming.UI
             _movingPoint.Scale = TrajectorySize.Value / (double)(TrajectorySize.Maximum - TrajectorySize.Minimum);
             _movingPoint.PointSpeed = TrajectorySpeed.Value / 100d;
             _movingPoint.Draw(PaintBox, e);
+
+            _movingFigure.Scale = TrajectorySize.Value / (double)(TrajectorySize.Maximum - TrajectorySize.Minimum);
+            _movingFigure.FigureScale = FigureSize.Value / (double)(FigureSize.Maximum - FigureSize.Minimum);
+            _movingFigure.PointSpeed = TrajectorySpeed.Value / 100d;
+            _movingFigure.Draw(PaintBox, e);
         }
 
         private void MainForm_Resize(object sender, EventArgs e)
@@ -295,6 +297,11 @@ namespace Programming.UI
         }
 
         private void MovingPointTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Invalidate();
+        }
+
+        private void FigureSize_Scroll(object sender, EventArgs e)
         {
             Invalidate();
         }

@@ -1,19 +1,29 @@
 using System;
+using System.Drawing;
 
 namespace Programming.Core
 {
-    public class Settings
+    public class FigureSettings
     {
-        private static Settings _instance;
+        public const int K = 3;
+        public const double MaxAngle = Math.PI;
+        public const double MinAngle = 0;
+        public const int PointCount = 1000;
 
-        public readonly int K = 3;
-        public readonly double MaxAngle = Math.PI;
-        public readonly double MinAngle = 0;
-        public readonly int PointCount = 1000;
-
-        public static Settings GetInstance()
+        public static readonly Point[] MovingFigureCharacteristicPoints =
         {
-            return _instance ?? (_instance = new Settings());
-        }
+            new Point { X = -40, Y = -40 },
+            new Point { X = -40, Y = -20 },
+            new Point { X = -20, Y = -20 },
+            new Point { X = -20, Y = 20 },
+            new Point { X = -40, Y = 20 },
+            new Point { X = -40, Y = 40 },
+            new Point { X = 40, Y = 40 },
+            new Point { X = 40, Y = 20 },
+            new Point { X = 20, Y = 20 },
+            new Point { X = 20, Y = -20 },
+            new Point { X = 40, Y = -20 },
+            new Point { X = 40, Y = -40 }
+        };
     }
 }
