@@ -7,6 +7,7 @@ namespace Programming.Shapes
     {
         private protected LissajousFigure Figure { get; } = new LissajousFigure();
         public double Scale { get; set; }
+        public static Color Color { get; set; } = Color.Black;
 
         private protected void SetFigure(Control paintBox)
         {
@@ -23,7 +24,7 @@ namespace Programming.Shapes
 
             var points = Figure.GetPoints();
 
-            e.Graphics.DrawPolygon(new Pen(Color.Black, 4), points);
+            e.Graphics.DrawPolygon(new Pen(Color, 4), points);
         }
     }
 }
