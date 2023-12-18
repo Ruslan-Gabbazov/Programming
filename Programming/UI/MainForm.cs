@@ -144,10 +144,12 @@ namespace Programming.UI
             // 
             FigureBreathSpeed.Location = new Point(25, 400);
             FigureBreathSpeed.Margin = new Padding(4);
+            FigureBreathSpeed.Maximum = 20;
             FigureBreathSpeed.Name = "FigureBreathSpeed";
             FigureBreathSpeed.Size = new Size(350, 56);
             FigureBreathSpeed.TabIndex = 7;
-            FigureBreathSpeed.Value = 1;
+            FigureBreathSpeed.Value = 10;
+            FigureBreathSpeed.Scroll += new EventHandler(FigureBreathSpeed_Scroll);
             // 
             // ColorSwichButton
             // 
@@ -192,9 +194,11 @@ namespace Programming.UI
             // 
             // AuthorLabel
             // 
-            AuthorLabel.Anchor = (AnchorStyles)(AnchorStyles.Bottom | AnchorStyles.Right);
+            AuthorLabel.Anchor = (AnchorStyles)(AnchorStyles.Bottom |
+                                                AnchorStyles.Right);
             AuthorLabel.AutoSize = true;
-            AuthorLabel.Font = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Italic, GraphicsUnit.Point, (byte)204);
+            AuthorLabel.Font = new Font("Microsoft Sans Serif", 10.2F,
+                FontStyle.Italic, GraphicsUnit.Point, (byte)204);
             AuthorLabel.Location = new Point(224, 579);
             AuthorLabel.Margin = new Padding(4, 0, 4, 0);
             AuthorLabel.Name = "AuthorLabel";
@@ -206,7 +210,8 @@ namespace Programming.UI
             // 
             ConfigLabel.Anchor = AnchorStyles.Top;
             ConfigLabel.AutoSize = true;
-            ConfigLabel.Font = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Bold, GraphicsUnit.Point, (byte)204);
+            ConfigLabel.Font = new Font("Microsoft Sans Serif", 10.2F,
+                FontStyle.Bold, GraphicsUnit.Point, (byte)204);
             ConfigLabel.Location = new Point(124, 21);
             ConfigLabel.Margin = new Padding(4, 0, 4, 0);
             ConfigLabel.Name = "ConfigLabel";
@@ -217,7 +222,10 @@ namespace Programming.UI
             // PaintBox
             // 
             PaintBox.Anchor =
-                (AnchorStyles)(AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right);
+                (AnchorStyles)(AnchorStyles.Top |
+                               AnchorStyles.Bottom |
+                               AnchorStyles.Left |
+                               AnchorStyles.Right);
             PaintBox.BackColor = Color.FloralWhite;
             PaintBox.Location = new Point(0, 0);
             PaintBox.Margin = new Padding(4);
@@ -272,6 +280,7 @@ namespace Programming.UI
 
             _movingFigure.Scale = TrajectorySize.Value / (double)(TrajectorySize.Maximum - TrajectorySize.Minimum);
             _movingFigure.FigureScale = FigureSize.Value / (double)(FigureSize.Maximum - FigureSize.Minimum);
+            _movingFigure.FigureBreathSpeed = FigureBreathSpeed.Value / 100d;
             _movingFigure.PointSpeed = TrajectorySpeed.Value / 100d;
             _movingFigure.Draw(PaintBox, e);
         }
@@ -302,6 +311,11 @@ namespace Programming.UI
         }
 
         private void FigureSize_Scroll(object sender, EventArgs e)
+        {
+            Invalidate();
+        }
+
+        private void FigureBreathSpeed_Scroll(object sender, EventArgs e)
         {
             Invalidate();
         }
