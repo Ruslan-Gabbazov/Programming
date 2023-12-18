@@ -50,6 +50,7 @@
         <Compile Include="Program.cs"/>
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="Shapes\LissajousFigure.cs"/>
+        <Compile Include="Shapes\MovingFigureTrajectory.cs"/>
         <Compile Include="Shapes\MovingPointTrajectory.cs"/>
         <Compile Include="Shapes\Trajectory.cs"/>
         <Compile Include="UI\MainForm.cs">

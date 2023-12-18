@@ -7,7 +7,7 @@ namespace Programming.Shapes
     {
         public double PointSpeed { get; set; }
 
-        private Point MovingPoint { get; set; }
+        private protected Point MovingPoint { get; set; }
 
 
         public new void Draw(PictureBox paintBox, PaintEventArgs e)
