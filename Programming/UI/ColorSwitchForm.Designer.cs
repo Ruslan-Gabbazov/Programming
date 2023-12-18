@@ -90,7 +90,7 @@ namespace Programming.UI
             this.ColorSwitchTrajectoryButton.TabIndex = 3;
             this.ColorSwitchTrajectoryButton.Text = "Задать цвет";
             this.ColorSwitchTrajectoryButton.UseVisualStyleBackColor = true;
-            this.ColorSwitchTrajectoryButton.Click += new System.EventHandler(this.ColorSwitchTrajectoryButton_Click); 
+            this.ColorSwitchTrajectoryButton.Click += new System.EventHandler(this.ColorSwitchTrajectoryButton_Click);
             // 
             // FieldColorLabel
             // 
