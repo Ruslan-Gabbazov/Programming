@@ -53,6 +53,12 @@
         <Compile Include="Shapes\MovingFigureTrajectory.cs"/>
         <Compile Include="Shapes\MovingPointTrajectory.cs"/>
         <Compile Include="Shapes\Trajectory.cs"/>
+        <Compile Include="UI\ColorSwitchForm.cs">
+            <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="UI\ColorSwitchForm.Designer.cs">
+            <DependentUpon>ColorSwitchForm.cs</DependentUpon>
+        </Compile>
         <Compile Include="UI\MainForm.cs">
             <SubType>Form</SubType>
         </Compile>
@@ -68,6 +74,9 @@
             <AutoGen>True</AutoGen>
             <DependentUpon>Resources.resx</DependentUpon>
         </Compile>
+        <EmbeddedResource Include="UI\ColorSwitchForm.resx">
+            <DependentUpon>ColorSwitchForm.cs</DependentUpon>
+        </EmbeddedResource>
         <EmbeddedResource Include="UI\MainForm.resx">
             <DependentUpon>MainForm.cs</DependentUpon>
         </EmbeddedResource>

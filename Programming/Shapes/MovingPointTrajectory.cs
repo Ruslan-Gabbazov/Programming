@@ -9,6 +9,8 @@ namespace Programming.Shapes
 
         private protected Point MovingPoint { get; set; }
 
+        public new static Color Color = Color.Red;
+
 
         public new void Draw(PictureBox paintBox, PaintEventArgs e)
         {
@@ -16,7 +18,7 @@ namespace Programming.Shapes
 
             MovingPoint = Figure.GetNextPoint(PointSpeed);
 
-            e.Graphics.DrawEllipse(new Pen(Color.Red, 10), MovingPoint.X, MovingPoint.Y, 1, 1);
+            e.Graphics.DrawEllipse(new Pen(Color, 10), MovingPoint.X, MovingPoint.Y, 1, 1);
         }
     }
 }

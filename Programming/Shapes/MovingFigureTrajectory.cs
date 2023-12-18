@@ -14,6 +14,8 @@ namespace Programming.Shapes
         public double FigureBreathSpeed { get; set; }
         private double _fi;
 
+        public new static Color Color = Color.Green;
+
 
         public MovingFigureTrajectory(Point[] characteristicPoints = null)
         {
@@ -45,7 +47,7 @@ namespace Programming.Shapes
             MovingPoint = Figure.GetNextPoint(PointSpeed);
             Breathe();
 
-            e.Graphics.DrawLines(new Pen(Color.Green, 5), AbsolutePoints);
+            e.Graphics.DrawLines(new Pen(Color, 5), AbsolutePoints);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.Timers;
 using System.Windows.Forms;
@@ -10,12 +9,14 @@ namespace Programming.UI
 {
     public partial class MainForm : Form
     {
+        public static Color Color = Color.White;
+
         private readonly MovingPointTrajectory _movingPoint = new MovingPointTrajectory();
         private readonly MovingFigureTrajectory _movingFigure = new MovingFigureTrajectory();
         private readonly Trajectory _trajectory = new Trajectory();
 
         private Label AuthorLabel;
-        private Button ColorSwichButton;
+        private Button ColorSwitchButton;
 
         private Label ConfigLabel;
         private Panel ControlPanel;
@@ -52,20 +53,20 @@ namespace Programming.UI
             FigureSize = new TrackBar();
             FigureBreathingSpeedLabel = new Label();
             FigureBreathSpeed = new TrackBar();
-            ColorSwichButton = new Button();
+            ColorSwitchButton = new Button();
             FigureSwichButton = new Button();
             ControlPanel = new Panel();
             AuthorLabel = new Label();
             ConfigLabel = new Label();
             PaintBox = new PictureBox();
             MovingPointTimer = new Timer();
-            ((ISupportInitialize)TrajectorySize).BeginInit();
-            ((ISupportInitialize)TrajectorySpeed).BeginInit();
-            ((ISupportInitialize)FigureSize).BeginInit();
-            ((ISupportInitialize)FigureBreathSpeed).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)TrajectorySize).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)TrajectorySpeed).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)FigureSize).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)FigureBreathSpeed).BeginInit();
             ControlPanel.SuspendLayout();
-            ((ISupportInitialize)PaintBox).BeginInit();
-            ((ISupportInitialize)MovingPointTimer).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)PaintBox).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)MovingPointTimer).BeginInit();
             SuspendLayout();
             // 
             // TrajectorySize
@@ -151,15 +152,16 @@ namespace Programming.UI
             FigureBreathSpeed.Value = 10;
             FigureBreathSpeed.Scroll += new EventHandler(FigureBreathSpeed_Scroll);
             // 
-            // ColorSwichButton
+            // ColorSwitchButton
             // 
-            ColorSwichButton.Location = new Point(99, 476);
-            ColorSwichButton.Margin = new Padding(3, 2, 3, 2);
-            ColorSwichButton.Name = "ColorSwichButton";
-            ColorSwichButton.Size = new Size(210, 25);
-            ColorSwichButton.TabIndex = 8;
-            ColorSwichButton.Text = "Изменить цвета";
-            ColorSwichButton.UseVisualStyleBackColor = true;
+            ColorSwitchButton.Location = new Point(99, 476);
+            ColorSwitchButton.Margin = new Padding(3, 2, 3, 2);
+            ColorSwitchButton.Name = "ColorSwitchButton";
+            ColorSwitchButton.Size = new Size(210, 25);
+            ColorSwitchButton.TabIndex = 8;
+            ColorSwitchButton.Text = "Изменить цвета";
+            ColorSwitchButton.UseVisualStyleBackColor = true;
+            ColorSwitchButton.Click += new EventHandler(ColorSwitchButton_Click);
             // 
             // FigureSwichButton
             // 
@@ -176,7 +178,7 @@ namespace Programming.UI
             ControlPanel.Controls.Add(AuthorLabel);
             ControlPanel.Controls.Add(ConfigLabel);
             ControlPanel.Controls.Add(FigureSwichButton);
-            ControlPanel.Controls.Add(ColorSwichButton);
+            ControlPanel.Controls.Add(ColorSwitchButton);
             ControlPanel.Controls.Add(FigureBreathSpeed);
             ControlPanel.Controls.Add(FigureBreathingSpeedLabel);
             ControlPanel.Controls.Add(FigureSize);
@@ -194,11 +196,9 @@ namespace Programming.UI
             // 
             // AuthorLabel
             // 
-            AuthorLabel.Anchor = (AnchorStyles)(AnchorStyles.Bottom |
-                                                AnchorStyles.Right);
+            AuthorLabel.Anchor = (AnchorStyles)(AnchorStyles.Bottom | AnchorStyles.Right);
             AuthorLabel.AutoSize = true;
-            AuthorLabel.Font = new Font("Microsoft Sans Serif", 10.2F,
-                FontStyle.Italic, GraphicsUnit.Point, (byte)204);
+            AuthorLabel.Font = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Italic, GraphicsUnit.Point, (byte)204);
             AuthorLabel.Location = new Point(224, 579);
             AuthorLabel.Margin = new Padding(4, 0, 4, 0);
             AuthorLabel.Name = "AuthorLabel";
@@ -210,8 +210,7 @@ namespace Programming.UI
             // 
             ConfigLabel.Anchor = AnchorStyles.Top;
             ConfigLabel.AutoSize = true;
-            ConfigLabel.Font = new Font("Microsoft Sans Serif", 10.2F,
-                FontStyle.Bold, GraphicsUnit.Point, (byte)204);
+            ConfigLabel.Font = new Font("Microsoft Sans Serif", 10.2F, FontStyle.Bold, GraphicsUnit.Point, (byte)204);
             ConfigLabel.Location = new Point(124, 21);
             ConfigLabel.Margin = new Padding(4, 0, 4, 0);
             ConfigLabel.Name = "ConfigLabel";
@@ -222,10 +221,7 @@ namespace Programming.UI
             // PaintBox
             // 
             PaintBox.Anchor =
-                (AnchorStyles)(AnchorStyles.Top |
-                               AnchorStyles.Bottom |
-                               AnchorStyles.Left |
-                               AnchorStyles.Right);
+                (AnchorStyles)(AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right);
             PaintBox.BackColor = Color.FloralWhite;
             PaintBox.Location = new Point(0, 0);
             PaintBox.Margin = new Padding(4);
@@ -255,21 +251,21 @@ namespace Programming.UI
             Text = "Programming";
             Paint += new PaintEventHandler(MainForm_Paint);
             Resize += new EventHandler(MainForm_Resize);
-            ((ISupportInitialize)TrajectorySize).EndInit();
-            ((ISupportInitialize)TrajectorySpeed).EndInit();
-            ((ISupportInitialize)FigureSize).EndInit();
-            ((ISupportInitialize)FigureBreathSpeed).EndInit();
+            ((System.ComponentModel.ISupportInitialize)TrajectorySize).EndInit();
+            ((System.ComponentModel.ISupportInitialize)TrajectorySpeed).EndInit();
+            ((System.ComponentModel.ISupportInitialize)FigureSize).EndInit();
+            ((System.ComponentModel.ISupportInitialize)FigureBreathSpeed).EndInit();
             ControlPanel.ResumeLayout(false);
             ControlPanel.PerformLayout();
-            ((ISupportInitialize)PaintBox).EndInit();
-            ((ISupportInitialize)MovingPointTimer).EndInit();
+            ((System.ComponentModel.ISupportInitialize)PaintBox).EndInit();
+            ((System.ComponentModel.ISupportInitialize)MovingPointTimer).EndInit();
             ResumeLayout(false);
         }
 
 
         private void PaintBox_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.Clear(Color.White);
+            e.Graphics.Clear(Color);
 
             _trajectory.Scale = TrajectorySize.Value / (double)(TrajectorySize.Maximum - TrajectorySize.Minimum);
             _trajectory.Draw(PaintBox, e);
@@ -317,6 +313,14 @@ namespace Programming.UI
 
         private void FigureBreathSpeed_Scroll(object sender, EventArgs e)
         {
+            Invalidate();
+        }
+
+        private void ColorSwitchButton_Click(object sender, EventArgs e)
+        {
+            var colorSwitchForm = new ColorSwitchForm();
+            colorSwitchForm.Show();
+
             Invalidate();
         }
     }
