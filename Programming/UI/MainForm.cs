@@ -11,9 +11,8 @@ namespace Programming.UI
     {
         public static Color Color = Color.White;
 
-        private readonly MovingPointTrajectory _movingPoint = new MovingPointTrajectory();
-        private readonly MovingFigureTrajectory _movingFigure = new MovingFigureTrajectory();
         private readonly Trajectory _trajectory = new Trajectory();
+        public static MovingFigureTrajectory MovingFigure { get; set; } = new MovingFigureTrajectory();
 
         private Label AuthorLabel;
         private Button ColorSwitchButton;
@@ -25,7 +24,7 @@ namespace Programming.UI
         private Label FigureMoveSpeedLabel;
         private TrackBar FigureSize;
         private Label FigureSizeLabel;
-        private Button FigureSwichButton;
+        private Button FigureSwitchButton;
 
         private Timer MovingPointTimer;
         private PictureBox PaintBox;
@@ -54,7 +53,7 @@ namespace Programming.UI
             FigureBreathingSpeedLabel = new Label();
             FigureBreathSpeed = new TrackBar();
             ColorSwitchButton = new Button();
-            FigureSwichButton = new Button();
+            FigureSwitchButton = new Button();
             ControlPanel = new Panel();
             AuthorLabel = new Label();
             ConfigLabel = new Label();
@@ -163,21 +162,22 @@ namespace Programming.UI
             ColorSwitchButton.UseVisualStyleBackColor = true;
             ColorSwitchButton.Click += new EventHandler(ColorSwitchButton_Click);
             // 
-            // FigureSwichButton
+            // FigureSwitchButton
             // 
-            FigureSwichButton.Location = new Point(99, 516);
-            FigureSwichButton.Margin = new Padding(3, 2, 3, 2);
-            FigureSwichButton.Name = "FigureSwichButton";
-            FigureSwichButton.Size = new Size(210, 26);
-            FigureSwichButton.TabIndex = 9;
-            FigureSwichButton.Text = "Изменить фигуру";
-            FigureSwichButton.UseVisualStyleBackColor = true;
+            FigureSwitchButton.Location = new Point(99, 516);
+            FigureSwitchButton.Margin = new Padding(3, 2, 3, 2);
+            FigureSwitchButton.Name = "FigureSwitchButton";
+            FigureSwitchButton.Size = new Size(210, 26);
+            FigureSwitchButton.TabIndex = 9;
+            FigureSwitchButton.Text = "Изменить фигуру";
+            FigureSwitchButton.UseVisualStyleBackColor = true;
+            FigureSwitchButton.Click += new EventHandler(FigureSwitchButton_Click);
             // 
             // ControlPanel
             // 
             ControlPanel.Controls.Add(AuthorLabel);
             ControlPanel.Controls.Add(ConfigLabel);
-            ControlPanel.Controls.Add(FigureSwichButton);
+            ControlPanel.Controls.Add(FigureSwitchButton);
             ControlPanel.Controls.Add(ColorSwitchButton);
             ControlPanel.Controls.Add(FigureBreathSpeed);
             ControlPanel.Controls.Add(FigureBreathingSpeedLabel);
@@ -270,15 +270,11 @@ namespace Programming.UI
             _trajectory.Scale = TrajectorySize.Value / (double)(TrajectorySize.Maximum - TrajectorySize.Minimum);
             _trajectory.Draw(PaintBox, e);
 
-            _movingPoint.Scale = TrajectorySize.Value / (double)(TrajectorySize.Maximum - TrajectorySize.Minimum);
-            _movingPoint.PointSpeed = TrajectorySpeed.Value / 100d;
-            _movingPoint.Draw(PaintBox, e);
-
-            _movingFigure.Scale = TrajectorySize.Value / (double)(TrajectorySize.Maximum - TrajectorySize.Minimum);
-            _movingFigure.FigureScale = FigureSize.Value / (double)(FigureSize.Maximum - FigureSize.Minimum);
-            _movingFigure.FigureBreathSpeed = FigureBreathSpeed.Value / 100d;
-            _movingFigure.PointSpeed = TrajectorySpeed.Value / 100d;
-            _movingFigure.Draw(PaintBox, e);
+            MovingFigure.Scale = TrajectorySize.Value / (double)(TrajectorySize.Maximum - TrajectorySize.Minimum);
+            MovingFigure.FigureScale = FigureSize.Value / (double)(FigureSize.Maximum - FigureSize.Minimum);
+            MovingFigure.FigureBreathSpeed = FigureBreathSpeed.Value / 100d;
+            MovingFigure.PointSpeed = TrajectorySpeed.Value / 100d;
+            MovingFigure.Draw(PaintBox, e);
         }
 
         private void MainForm_Resize(object sender, EventArgs e)
@@ -320,6 +316,14 @@ namespace Programming.UI
         {
             var colorSwitchForm = new ColorSwitchForm();
             colorSwitchForm.Show();
+
+            Invalidate();
+        }
+
+        private void FigureSwitchButton_Click(object sender, EventArgs e)
+        {
+            var figureSwitchForm = new FigureSwitchForm();
+            figureSwitchForm.Show();
 
             Invalidate();
         }

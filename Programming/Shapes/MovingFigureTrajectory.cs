@@ -7,8 +7,8 @@ namespace Programming.Shapes
 {
     public class MovingFigureTrajectory : MovingPointTrajectory
     {
-        private Point[] CharacteristicPoints { get; set; }
-        private Point[] AbsolutePoints { get; set; } = new Point[12 + 1];
+        public Point[] CharacteristicPoints { get; set; }
+        private Point[] AbsolutePoints { get; set; }
         public double FigureScale { get; set; }
 
         public double FigureBreathSpeed { get; set; }
@@ -20,6 +20,7 @@ namespace Programming.Shapes
         public MovingFigureTrajectory(Point[] characteristicPoints = null)
         {
             CharacteristicPoints = characteristicPoints ?? FigureSettings.MovingFigureCharacteristicPoints;
+            AbsolutePoints = new Point[CharacteristicPoints.Length + 1];
         }
 
         private void SetAbsolutePoints(double fi)
