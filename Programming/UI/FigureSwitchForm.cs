@@ -32,5 +32,16 @@ namespace Programming.UI
 
             Close();
         }
+
+        private void CopyFigureButton_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(FigureSwitchTextBoxForVertexCoordinates.Text);
+        }
+
+        private void PasteFigureButton_Click(object sender, EventArgs e)
+        {
+            if (Clipboard.ContainsText())
+                FigureSwitchTextBoxForVertexCoordinates.Text = Clipboard.GetText();
+        }
     }
 }
