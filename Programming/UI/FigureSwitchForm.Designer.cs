@@ -32,6 +32,8 @@ namespace Programming.UI
         private void InitializeComponent()
         {
             this.ControlPanel = new System.Windows.Forms.Panel();
+            this.PasteFigureButton = new System.Windows.Forms.Button();
+            this.CopyFigureButton = new System.Windows.Forms.Button();
             this.FigureSwitchFigurePreviousFigureButton = new System.Windows.Forms.Button();
             this.FigureSwitchFigureOkButton = new System.Windows.Forms.Button();
             this.FigureSwitchCoordinatesOfVertexLabel = new System.Windows.Forms.Label();
@@ -41,6 +43,8 @@ namespace Programming.UI
             // 
             // ControlPanel
             // 
+            this.ControlPanel.Controls.Add(this.PasteFigureButton);
+            this.ControlPanel.Controls.Add(this.CopyFigureButton);
             this.ControlPanel.Controls.Add(this.FigureSwitchFigurePreviousFigureButton);
             this.ControlPanel.Controls.Add(this.FigureSwitchFigureOkButton);
             this.ControlPanel.Controls.Add(this.FigureSwitchCoordinatesOfVertexLabel);
@@ -49,8 +53,30 @@ namespace Programming.UI
             this.ControlPanel.Location = new System.Drawing.Point(0, 0);
             this.ControlPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ControlPanel.Name = "ControlPanel";
-            this.ControlPanel.Size = new System.Drawing.Size(401, 366);
+            this.ControlPanel.Size = new System.Drawing.Size(401, 402);
             this.ControlPanel.TabIndex = 1;
+            // 
+            // PasteFigureButton
+            // 
+            this.PasteFigureButton.Location = new System.Drawing.Point(204, 341);
+            this.PasteFigureButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PasteFigureButton.Name = "PasteFigureButton";
+            this.PasteFigureButton.Size = new System.Drawing.Size(170, 33);
+            this.PasteFigureButton.TabIndex = 7;
+            this.PasteFigureButton.Text = "Вставить";
+            this.PasteFigureButton.UseVisualStyleBackColor = true;
+            this.PasteFigureButton.Click += new System.EventHandler(this.PasteFigureButton_Click);
+            // 
+            // CopyFigureButton
+            // 
+            this.CopyFigureButton.Location = new System.Drawing.Point(24, 341);
+            this.CopyFigureButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.CopyFigureButton.Name = "CopyFigureButton";
+            this.CopyFigureButton.Size = new System.Drawing.Size(170, 33);
+            this.CopyFigureButton.TabIndex = 6;
+            this.CopyFigureButton.Text = "Копировать";
+            this.CopyFigureButton.UseVisualStyleBackColor = true;
+            this.CopyFigureButton.Click += new System.EventHandler(this.CopyFigureButton_Click);
             // 
             // FigureSwitchFigurePreviousFigureButton
             // 
@@ -97,7 +123,7 @@ namespace Programming.UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(401, 366);
+            this.ClientSize = new System.Drawing.Size(401, 402);
             this.Controls.Add(this.ControlPanel);
             this.Name = "FigureSwitchForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -106,6 +132,9 @@ namespace Programming.UI
             this.ControlPanel.PerformLayout();
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Button CopyFigureButton;
+        private System.Windows.Forms.Button PasteFigureButton;
 
         private System.Windows.Forms.Panel ControlPanel;
         private System.Windows.Forms.Button FigureSwitchFigurePreviousFigureButton;
