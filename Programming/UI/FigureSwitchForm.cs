@@ -7,11 +7,25 @@ namespace Programming.UI
 {
     public partial class FigureSwitchForm : Form
     {
+        public event EventHandler ClipboardCopied;
+        public event EventHandler ClipboardPasted;
+
         public FigureSwitchForm()
         {
             InitializeComponent();
 
-            FigureSwitchTextBoxForVertexCoordinates.Text =
+            ClipboardCopied += (sender, args) =>
+                MessageBox.Show("Фигура скопирована!",
+                    "Копирование фигуры в буфера обмена",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            ClipboardPasted += (sender, args) =>
+                MessageBox.Show("Фигура вставлена!",
+                    "Вставка фигуры из буфера обмена",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            
+            FigureTextSwitchCharacteristicPoints.Text =
                 StringToFigureConverter.ConvertPointsToText(
                     MainForm.MovingFigure.CharacteristicPoints);
         }
@@ -19,7 +33,7 @@ namespace Programming.UI
         private void FigureSwitchFigureOkButton_Click(object sender, EventArgs e)
         {
             var characteristicPoints = StringToFigureConverter.ConvertTextToPoints(
-                FigureSwitchTextBoxForVertexCoordinates.Text);
+                FigureTextSwitchCharacteristicPoints.Text);
             MainForm.MovingFigure = new MovingFigureTrajectory(characteristicPoints);
 
             Close();
@@ -35,13 +49,16 @@ namespace Programming.UI
 
         private void CopyFigureButton_Click(object sender, EventArgs e)
         {
-            Clipboard.SetText(FigureSwitchTextBoxForVertexCoordinates.Text);
+            Clipboard.SetText(FigureTextSwitchCharacteristicPoints.Text);
+            ClipboardCopied?.Invoke(this, EventArgs.Empty);
         }
 
         private void PasteFigureButton_Click(object sender, EventArgs e)
         {
-            if (Clipboard.ContainsText())
-                FigureSwitchTextBoxForVertexCoordinates.Text = Clipboard.GetText();
+            if (!Clipboard.ContainsText()) return;
+
+            FigureTextSwitchCharacteristicPoints.Text = Clipboard.GetText();
+            ClipboardPasted?.Invoke(this, EventArgs.Empty);
         }
     }
 }
