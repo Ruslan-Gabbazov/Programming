@@ -15,12 +15,12 @@ namespace Programming.Shapes
 
         public LissajousFigure()
         {
-            _k = FigureSettings.K;
-            _fi = FigureSettings.MinAngle;
-            _minAngle = FigureSettings.MinAngle;
-            _maxAngle = FigureSettings.MaxAngle;
-            _pointCount = FigureSettings.PointCount;
-            _step = (FigureSettings.MaxAngle - FigureSettings.MinAngle) / _pointCount;
+            _k = DefaultSettings.K;
+            _fi = DefaultSettings.MinAngle;
+            _minAngle = DefaultSettings.MinAngle;
+            _maxAngle = DefaultSettings.MaxAngle;
+            _pointCount = DefaultSettings.PointCount;
+            _step = (DefaultSettings.MaxAngle - DefaultSettings.MinAngle) / _pointCount;
 
             Points = new Point[_pointCount];
         }

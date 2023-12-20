@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Programming.Core
 {
@@ -8,7 +10,8 @@ namespace Programming.Core
     {
         public static Point[] ConvertTextToPoints(string text)
         {
-            var lines = text.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            text = Regex.Replace(text, @"\s", "");
+            var lines = text.Trim().Split(new[] { ",", "(", ")" }, StringSplitOptions.RemoveEmptyEntries);
 
             return (from line in lines
                 select line.Split(';')
@@ -18,9 +21,9 @@ namespace Programming.Core
                 select new Point { X = x, Y = y }).ToArray();
         }
 
-        public static string ConvertPointsToText(Point[] points)
+        public static string ConvertPointsToText(IEnumerable<Point> points, string lineSeparator = ",\n")
         {
-            return string.Join("\n", points.Select(p => $"{p.X}; {p.Y}"));
+            return string.Join(lineSeparator, points.Select(p => $"({p.X}; {p.Y})"));
         }
     }
 }

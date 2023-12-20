@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Timers;
 using System.Windows.Forms;
+using Programming.Core;
 using Programming.Shapes;
 using Timer = System.Timers.Timer;
 
@@ -11,8 +12,12 @@ namespace Programming.UI
     {
         public static Color Color = Color.White;
 
+        public static readonly Config Config = new Config();
+
         private readonly Trajectory _trajectory = new Trajectory();
-        public static MovingFigureTrajectory MovingFigure { get; set; } = new MovingFigureTrajectory();
+
+        public static MovingFigureTrajectory MovingFigure { get; set; } =
+            new MovingFigureTrajectory(Config.CharacteristicPoints);
 
         private Label AuthorLabel;
         private Button ColorSwitchButton;
@@ -251,6 +256,8 @@ namespace Programming.UI
             Text = "Programming";
             Paint += new PaintEventHandler(MainForm_Paint);
             Resize += new EventHandler(MainForm_Resize);
+            Load += new EventHandler(MainForm_Load);
+            FormClosing += new FormClosingEventHandler(MainForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)TrajectorySize).EndInit();
             ((System.ComponentModel.ISupportInitialize)TrajectorySpeed).EndInit();
             ((System.ComponentModel.ISupportInitialize)FigureSize).EndInit();
@@ -326,6 +333,37 @@ namespace Programming.UI
             figureSwitchForm.Show();
 
             Invalidate();
+        }
+
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            TrajectorySize.Value = Config.TrajectorySize;
+            TrajectorySpeed.Value = Config.FigureSpeed;
+            FigureSize.Value = Config.FigureSize;
+            FigureBreathSpeed.Value = Config.FigureBreathingSpeed;
+
+            Color = Config.FieldColor;
+            Trajectory.Color = Config.TrajectoryColor;
+            MovingFigureTrajectory.Color = Config.FigureColor;
+
+            MovingFigure.CharacteristicPoints = Config.CharacteristicPoints;
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Config.TrajectorySize = TrajectorySize.Value;
+            Config.FigureSpeed = TrajectorySpeed.Value;
+            Config.FigureSize = FigureSize.Value;
+            Config.FigureBreathingSpeed = FigureBreathSpeed.Value;
+
+            Config.FieldColor = Color;
+            Config.TrajectoryColor = Trajectory.Color;
+            Config.FigureColor = MovingFigureTrajectory.Color;
+
+            Config.CharacteristicPoints = MovingFigure.CharacteristicPoints;
+
+            Config.SaveConfigToIni();
         }
     }
 }

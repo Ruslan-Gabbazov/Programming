@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using Programming.Core;
 using Programming.Shapes;
 
 namespace Programming.UI
@@ -39,6 +40,13 @@ namespace Programming.UI
 
             if (fieldColorDialog.ShowDialog() == DialogResult.OK)
                 MainForm.Color = fieldColorDialog.Color;
+        }
+
+        private void ResetColorsButton_Click(object sender, EventArgs e)
+        {
+            MainForm.Color = DefaultSettings.FieldColor;
+            Trajectory.Color = DefaultSettings.TrajectoryColor;
+            MovingFigureTrajectory.Color = DefaultSettings.FigureColor;
         }
     }
 }
