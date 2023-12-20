@@ -27,7 +27,7 @@ namespace Programming.UI
 
         private void FigureSwitchFigurePreviousFigureButton_Click(object sender, EventArgs e)
         {
-            var characteristicPoints = FigureSettings.MovingFigureCharacteristicPoints;
+            var characteristicPoints = DefaultSettings.MovingFigureCharacteristicPoints;
             MainForm.MovingFigure = new MovingFigureTrajectory(characteristicPoints);
 
             Close();

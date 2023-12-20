@@ -32,6 +32,8 @@ namespace Programming.UI
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.ResetColorsButton = new System.Windows.Forms.Button();
+            this.ResetColorsLabel = new System.Windows.Forms.Label();
             this.ColorSwitchFieldButton = new System.Windows.Forms.Button();
             this.ColorSwitchFigureButton = new System.Windows.Forms.Button();
             this.ColorSwitchTrajectoryButton = new System.Windows.Forms.Button();
@@ -46,6 +48,8 @@ namespace Programming.UI
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.ResetColorsButton);
+            this.panel1.Controls.Add(this.ResetColorsLabel);
             this.panel1.Controls.Add(this.ColorSwitchFieldButton);
             this.panel1.Controls.Add(this.ColorSwitchFigureButton);
             this.panel1.Controls.Add(this.ColorSwitchTrajectoryButton);
@@ -56,8 +60,28 @@ namespace Programming.UI
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(218, 273);
+            this.panel1.Size = new System.Drawing.Size(218, 346);
             this.panel1.TabIndex = 1;
+            // 
+            // ResetColorsButton
+            // 
+            this.ResetColorsButton.Location = new System.Drawing.Point(30, 290);
+            this.ResetColorsButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ResetColorsButton.Name = "ResetColorsButton";
+            this.ResetColorsButton.Size = new System.Drawing.Size(159, 30);
+            this.ResetColorsButton.TabIndex = 7;
+            this.ResetColorsButton.Text = "Сброс";
+            this.ResetColorsButton.UseVisualStyleBackColor = true;
+            this.ResetColorsButton.Click += new System.EventHandler(this.ResetColorsButton_Click);
+            // 
+            // ResetColorsLabel
+            // 
+            this.ResetColorsLabel.AutoSize = true;
+            this.ResetColorsLabel.Location = new System.Drawing.Point(30, 260);
+            this.ResetColorsLabel.Name = "ResetColorsLabel";
+            this.ResetColorsLabel.Size = new System.Drawing.Size(129, 17);
+            this.ResetColorsLabel.TabIndex = 6;
+            this.ResetColorsLabel.Text = "Сброс всех цветов";
             // 
             // ColorSwitchFieldButton
             // 
@@ -124,7 +148,7 @@ namespace Programming.UI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(218, 273);
+            this.ClientSize = new System.Drawing.Size(218, 346);
             this.Controls.Add(this.panel1);
             this.Name = "ColorSwitchForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -133,6 +157,9 @@ namespace Programming.UI
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Button ResetColorsButton;
+        private System.Windows.Forms.Label ResetColorsLabel;
 
         private System.Windows.Forms.ColorDialog ColorSwitchTrajectoryDialog;
         private System.Windows.Forms.ColorDialog ColorSwitchFigureDialog;

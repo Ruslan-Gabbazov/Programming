@@ -19,7 +19,7 @@ namespace Programming.Shapes
 
         public MovingFigureTrajectory(Point[] characteristicPoints = null)
         {
-            CharacteristicPoints = characteristicPoints ?? FigureSettings.MovingFigureCharacteristicPoints;
+            CharacteristicPoints = characteristicPoints ?? DefaultSettings.MovingFigureCharacteristicPoints;
             AbsolutePoints = new Point[CharacteristicPoints.Length + 1];
         }
 
@@ -27,8 +27,10 @@ namespace Programming.Shapes
         {
             for (var i = 0; i < CharacteristicPoints.Length; i++)
             {
-                AbsolutePoints[i].X = (int)(FigureScale * CharacteristicPoints[i].X * Math.Cos(fi)) + MovingPoint.X;
-                AbsolutePoints[i].Y = (int)(FigureScale * CharacteristicPoints[i].Y * Math.Cos(fi)) + MovingPoint.Y;
+                AbsolutePoints[i].X = (int)(FigureScale * CharacteristicPoints[i].X * Math.Abs(Math.Cos(fi))) +
+                                      MovingPoint.X;
+                AbsolutePoints[i].Y = (int)(FigureScale * CharacteristicPoints[i].Y * Math.Abs(Math.Cos(fi))) +
+                                      MovingPoint.Y;
             }
 
             AbsolutePoints[AbsolutePoints.Length - 1] = AbsolutePoints[0];
