@@ -10,6 +10,9 @@ namespace Programming.Core
     {
         public static Point[] ConvertTextToPoints(string text)
         {
+            if (string.IsNullOrEmpty(text))
+                throw new FormatException();
+
             text = Regex.Replace(text, @"\s", "");
             var lines = text.Trim().Split(new[] { ",", "(", ")" }, StringSplitOptions.RemoveEmptyEntries);
 

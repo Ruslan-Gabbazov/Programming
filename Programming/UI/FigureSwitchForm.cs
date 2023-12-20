@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using Programming.Core;
+using Programming.Properties;
 using Programming.Shapes;
 
 namespace Programming.UI
@@ -9,6 +10,7 @@ namespace Programming.UI
     {
         public event EventHandler ClipboardCopied;
         public event EventHandler ClipboardPasted;
+        public event EventHandler FigureSwitchFailed;
 
         public FigureSwitchForm()
         {
@@ -24,7 +26,12 @@ namespace Programming.UI
                     "Вставка фигуры из буфера обмена",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
-            
+            FigureSwitchFailed += (sender, args) =>
+                MessageBox.Show(Resources.FigureSwitchFailure.Replace("\\n", Environment.NewLine),
+                    "Неверный формат фигуры",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+
             FigureTextSwitchCharacteristicPoints.Text =
                 StringToFigureConverter.ConvertPointsToText(
                     MainForm.MovingFigure.CharacteristicPoints);
@@ -32,11 +39,18 @@ namespace Programming.UI
 
         private void FigureSwitchFigureOkButton_Click(object sender, EventArgs e)
         {
-            var characteristicPoints = StringToFigureConverter.ConvertTextToPoints(
-                FigureTextSwitchCharacteristicPoints.Text);
-            MainForm.MovingFigure = new MovingFigureTrajectory(characteristicPoints);
+            try
+            {
+                var characteristicPoints = StringToFigureConverter.ConvertTextToPoints(
+                    FigureTextSwitchCharacteristicPoints.Text);
+                MainForm.MovingFigure = new MovingFigureTrajectory(characteristicPoints);
 
-            Close();
+                Close();
+            }
+            catch (FormatException)
+            {
+                FigureSwitchFailed?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         private void FigureSwitchFigurePreviousFigureButton_Click(object sender, EventArgs e)
