@@ -37,7 +37,7 @@ namespace Programming.UI
             this.FigureSwitchFigurePreviousFigureButton = new System.Windows.Forms.Button();
             this.FigureSwitchFigureOkButton = new System.Windows.Forms.Button();
             this.FigureSwitchCoordinatesOfVertexLabel = new System.Windows.Forms.Label();
-            this.FigureSwitchTextBoxForVertexCoordinates = new System.Windows.Forms.RichTextBox();
+            this.FigureTextSwitchCharacteristicPoints = new System.Windows.Forms.RichTextBox();
             this.ControlPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,7 +48,7 @@ namespace Programming.UI
             this.ControlPanel.Controls.Add(this.FigureSwitchFigurePreviousFigureButton);
             this.ControlPanel.Controls.Add(this.FigureSwitchFigureOkButton);
             this.ControlPanel.Controls.Add(this.FigureSwitchCoordinatesOfVertexLabel);
-            this.ControlPanel.Controls.Add(this.FigureSwitchTextBoxForVertexCoordinates);
+            this.ControlPanel.Controls.Add(this.FigureTextSwitchCharacteristicPoints);
             this.ControlPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ControlPanel.Location = new System.Drawing.Point(0, 0);
             this.ControlPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -110,14 +110,14 @@ namespace Programming.UI
             this.FigureSwitchCoordinatesOfVertexLabel.TabIndex = 3;
             this.FigureSwitchCoordinatesOfVertexLabel.Text = "Координаты вершин";
             // 
-            // FigureSwitchTextBoxForVertexCoordinates
+            // FigureTextSwitchCharacteristicPoints
             // 
-            this.FigureSwitchTextBoxForVertexCoordinates.Location = new System.Drawing.Point(24, 46);
-            this.FigureSwitchTextBoxForVertexCoordinates.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.FigureSwitchTextBoxForVertexCoordinates.Name = "FigureSwitchTextBoxForVertexCoordinates";
-            this.FigureSwitchTextBoxForVertexCoordinates.Size = new System.Drawing.Size(350, 230);
-            this.FigureSwitchTextBoxForVertexCoordinates.TabIndex = 2;
-            this.FigureSwitchTextBoxForVertexCoordinates.Text = "-40; -40\n-40; -20\n-20; -20\n-20; 20\n-40; 20\n-40; 40\n40; 40\n40; 20\n20; 20\n20; -20\n4" + "0; -20\n40; -40 ";
+            this.FigureTextSwitchCharacteristicPoints.Location = new System.Drawing.Point(24, 46);
+            this.FigureTextSwitchCharacteristicPoints.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.FigureTextSwitchCharacteristicPoints.Name = "FigureTextSwitchCharacteristicPoints";
+            this.FigureTextSwitchCharacteristicPoints.Size = new System.Drawing.Size(350, 230);
+            this.FigureTextSwitchCharacteristicPoints.TabIndex = 2;
+            this.FigureTextSwitchCharacteristicPoints.Text = "-40; -40\n-40; -20\n-20; -20\n-20; 20\n-40; 20\n-40; 40\n40; 40\n40; 20\n20; 20\n20; -20\n4" + "0; -20\n40; -40 ";
             // 
             // FigureSwitchForm
             // 
@@ -140,7 +140,7 @@ namespace Programming.UI
         private System.Windows.Forms.Button FigureSwitchFigurePreviousFigureButton;
         private System.Windows.Forms.Button FigureSwitchFigureOkButton;
         private System.Windows.Forms.Label FigureSwitchCoordinatesOfVertexLabel;
-        private System.Windows.Forms.RichTextBox FigureSwitchTextBoxForVertexCoordinates;
+        private System.Windows.Forms.RichTextBox FigureTextSwitchCharacteristicPoints;
 
         #endregion
     }
