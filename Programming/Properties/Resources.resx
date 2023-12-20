@@ -120,4 +120,7 @@
             PublicKeyToken=b77a5c561934e089
         </value>
     </resheader>
+    <data name="FigureSwitchFailure" xml:space="preserve">
+        <value>Ошибка при конвертировании текста в фигуру!\nПроверьте формат записи точек вершин фигуры.\nЛибо нажмите 'Сбросить', чтобы вставить фигуру по умолчанию.</value>
+    </data>
 </root>

@@ -58,5 +58,14 @@ namespace Programming.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ошибка при конвертировании текста в фигуру!\nПроверьте формат записи точек вершин фигуры.\nЛибо нажмите &apos;Сбросить&apos;, чтобы вставить фигуру по умолчанию..
+        /// </summary>
+        internal static string FigureSwitchFailure {
+            get {
+                return ResourceManager.GetString("FigureSwitchFailure", resourceCulture);
+            }
+        }
     }
 }
