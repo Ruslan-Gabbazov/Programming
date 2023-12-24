@@ -9,5 +9,4 @@ class MovingFigureTrajectory {
     + <<new>> Draw(paintBox:PictureBox, e:PaintEventArgs) : void
 }
 MovingPointTrajectory <|-- MovingFigureTrajectory
-MovingFigureTrajectory o-> "Color" Color
 @enduml

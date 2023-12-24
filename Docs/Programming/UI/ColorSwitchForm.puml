@@ -6,5 +6,4 @@ class ColorSwitchForm <<partial>> {
     - ColorSwitchFieldButton_Click(sender:object, e:EventArgs) : void
     - ResetColorsButton_Click(sender:object, e:EventArgs) : void
 }
-Form <|-- ColorSwitchForm
 @enduml

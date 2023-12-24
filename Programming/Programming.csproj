@@ -47,7 +47,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Core\Config.cs"/>
-        <Compile Include="Core\FigureSettings.cs"/>
+        <Compile Include="Core\DefaultSettings.cs" />
         <Compile Include="Core\IniFileManager.cs"/>
         <Compile Include="Core\StringToFigureConverter.cs"/>
         <Compile Include="Program.cs"/>

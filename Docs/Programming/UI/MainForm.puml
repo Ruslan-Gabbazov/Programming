@@ -15,24 +15,8 @@ class MainForm <<partial>> {
     - MainForm_Load(sender:object, e:EventArgs) : void
     - MainForm_FormClosing(sender:object, e:FormClosingEventArgs) : void
 }
-Form <|-- MainForm
-MainForm o-> "Color" Color
 MainForm o-> "Config" Config
 MainForm o-> "_trajectory" Trajectory
 MainForm o-> "MovingFigure" MovingFigureTrajectory
-MainForm --> "AuthorLabel" Label
-MainForm --> "ColorSwitchButton" Button
-MainForm --> "ConfigLabel" Label
-MainForm --> "ControlPanel" Panel
-MainForm --> "FigureBreathingSpeedLabel" Label
-MainForm --> "FigureBreathSpeed" TrackBar
-MainForm --> "FigureMoveSpeedLabel" Label
-MainForm --> "FigureSize" TrackBar
-MainForm --> "FigureSizeLabel" Label
-MainForm --> "FigureSwitchButton" Button
-MainForm --> "MovingPointTimer" Timer
-MainForm --> "PaintBox" PictureBox
-MainForm --> "TrajectorySize" TrackBar
-MainForm --> "TrajectorySizeLabel" Label
-MainForm --> "TrajectorySpeed" TrackBar
+
 @enduml

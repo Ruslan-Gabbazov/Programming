@@ -16,8 +16,5 @@ enum Sections {
     Figure,
 }
 Config o-> "_fileManager" IniFileManager
-Config o-> "TrajectoryColor" Color
-Config o-> "FigureColor" Color
-Config o-> "FieldColor" Color
 Config +-- Sections
 @enduml

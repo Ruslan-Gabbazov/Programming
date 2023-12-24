@@ -5,5 +5,4 @@ class Trajectory {
     + Draw(paintBox:PictureBox, e:PaintEventArgs) : void
 }
 Trajectory o-> "Figure" LissajousFigure
-Trajectory o-> "Color" Color
 @enduml

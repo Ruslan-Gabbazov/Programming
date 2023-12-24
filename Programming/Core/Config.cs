@@ -66,6 +66,7 @@ namespace Programming.Core
                 _fileManager.ReadIniFile(Sections.Figure, "CharacteristicPoints")
             );
         }
+        
 
         private Color GetColor(string colorString)
         {

@@ -13,5 +13,4 @@ class LissajousFigure {
     + GetPoints() : Point[]
     + GetNextPoint(step:double) : Point
 }
-LissajousFigure --> "Center" Point
 @enduml
