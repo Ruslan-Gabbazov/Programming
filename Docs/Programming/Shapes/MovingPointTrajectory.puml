@@ -1,0 +1,9 @@
+@startuml
+class MovingPointTrajectory {
+    + PointSpeed : double <<get>> <<set>>
+    + <<new>> Draw(paintBox:PictureBox, e:PaintEventArgs) : void
+}
+Trajectory <|-- MovingPointTrajectory
+MovingPointTrajectory --> "MovingPoint" Point
+MovingPointTrajectory o-> "Color" Color
+@enduml

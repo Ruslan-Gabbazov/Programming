@@ -1,0 +1,23 @@
+@startuml
+class Config {
+    - <<const>> FileName : string = "config.ini"
+    + TrajectorySize : int = 10
+    + FigureSize : int = 10
+    + FigureSpeed : int = 10
+    + FigureBreathingSpeed : int = 10
+    + Config()
+    + SaveConfigToIni() : void
+    + LoadConfigFromIni() : void
+    - GetColor(colorString:string) : Color
+}
+enum Sections {
+    WorkSpace,
+    Trajectory,
+    Figure,
+}
+Config o-> "_fileManager" IniFileManager
+Config o-> "TrajectoryColor" Color
+Config o-> "FigureColor" Color
+Config o-> "FieldColor" Color
+Config +-- Sections
+@enduml

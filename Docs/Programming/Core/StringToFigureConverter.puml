@@ -1,0 +1,6 @@
+@startuml
+class StringToFigureConverter <<static>> {
+    + {static} ConvertTextToPoints(text:string) : Point[]
+    + {static} ConvertPointsToText(points:IEnumerable<Point>, lineSeparator:string) : string
+}
+@enduml

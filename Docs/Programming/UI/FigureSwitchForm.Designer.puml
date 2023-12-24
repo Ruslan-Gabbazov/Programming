@@ -1,0 +1,7 @@
+@startuml
+class FigureSwitchForm <<partial>> {
+    # <<override>> Dispose(disposing:bool) : void
+    - InitializeComponent() : void
+}
+FigureSwitchForm o-> "components" IContainer
+@enduml

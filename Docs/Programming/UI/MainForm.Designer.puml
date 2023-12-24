@@ -1,0 +1,5 @@
+@startuml
+class MainForm <<partial>> {
+    # <<override>> Dispose(disposing:bool) : void
+}
+@enduml

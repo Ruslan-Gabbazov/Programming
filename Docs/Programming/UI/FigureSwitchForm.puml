@@ -1,0 +1,13 @@
+@startuml
+class FigureSwitchForm <<partial>> {
+    +  <<event>> ClipboardCopied : EventHandler 
+    +  <<event>> ClipboardPasted : EventHandler 
+    +  <<event>> FigureSwitchFailed : EventHandler 
+    + FigureSwitchForm()
+    - FigureSwitchFigureOkButton_Click(sender:object, e:EventArgs) : void
+    - FigureSwitchFigurePreviousFigureButton_Click(sender:object, e:EventArgs) : void
+    - CopyFigureButton_Click(sender:object, e:EventArgs) : void
+    - PasteFigureButton_Click(sender:object, e:EventArgs) : void
+}
+Form <|-- FigureSwitchForm
+@enduml

@@ -1,0 +1,38 @@
+@startuml
+class MainForm <<partial>> {
+    + MainForm()
+    - InitializeComponent() : void
+    - PaintBox_Paint(sender:object, e:PaintEventArgs) : void
+    - MainForm_Resize(sender:object, e:EventArgs) : void
+    - MainForm_Paint(sender:object, e:PaintEventArgs) : void
+    - TrajectorySize_Scroll(sender:object, e:EventArgs) : void
+    - TrajectorySpeed_Scroll(sender:object, e:EventArgs) : void
+    - MovingPointTimer_Elapsed(sender:object, e:ElapsedEventArgs) : void
+    - FigureSize_Scroll(sender:object, e:EventArgs) : void
+    - FigureBreathSpeed_Scroll(sender:object, e:EventArgs) : void
+    - ColorSwitchButton_Click(sender:object, e:EventArgs) : void
+    - FigureSwitchButton_Click(sender:object, e:EventArgs) : void
+    - MainForm_Load(sender:object, e:EventArgs) : void
+    - MainForm_FormClosing(sender:object, e:FormClosingEventArgs) : void
+}
+Form <|-- MainForm
+MainForm o-> "Color" Color
+MainForm o-> "Config" Config
+MainForm o-> "_trajectory" Trajectory
+MainForm o-> "MovingFigure" MovingFigureTrajectory
+MainForm --> "AuthorLabel" Label
+MainForm --> "ColorSwitchButton" Button
+MainForm --> "ConfigLabel" Label
+MainForm --> "ControlPanel" Panel
+MainForm --> "FigureBreathingSpeedLabel" Label
+MainForm --> "FigureBreathSpeed" TrackBar
+MainForm --> "FigureMoveSpeedLabel" Label
+MainForm --> "FigureSize" TrackBar
+MainForm --> "FigureSizeLabel" Label
+MainForm --> "FigureSwitchButton" Button
+MainForm --> "MovingPointTimer" Timer
+MainForm --> "PaintBox" PictureBox
+MainForm --> "TrajectorySize" TrackBar
+MainForm --> "TrajectorySizeLabel" Label
+MainForm --> "TrajectorySpeed" TrackBar
+@enduml

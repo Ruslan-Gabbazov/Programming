@@ -1,0 +1,9 @@
+@startuml
+class Trajectory {
+    + Scale : double <<get>> <<set>>
+    - # SetFigure(paintBox:Control) : void
+    + Draw(paintBox:PictureBox, e:PaintEventArgs) : void
+}
+Trajectory o-> "Figure" LissajousFigure
+Trajectory o-> "Color" Color
+@enduml

@@ -1,0 +1,21 @@
+@startuml
+!include .\\.\Programming\Program.puml
+!include .\\.\Programming\Core\Config.puml
+!include .\\.\Programming\Core\FigureSettings.puml
+!include .\\.\Programming\Core\IniFileManager.puml
+!include .\\.\Programming\Core\StringToFigureConverter.puml
+!include .\\.\Programming\Properties\AssemblyInfo.puml
+!include .\\.\Programming\Properties\Resources.Designer.puml
+!include .\\.\Programming\Properties\Settings.Designer.puml
+!include .\\.\Programming\Shapes\LissajousFigure.puml
+!include .\\.\Programming\Shapes\MovingFigureTrajectory.puml
+!include .\\.\Programming\Shapes\MovingPointTrajectory.puml
+!include .\\.\Programming\Shapes\Trajectory.puml
+!include .\\.\Programming\UI\ColorSwitchForm.puml
+!include .\\.\Programming\UI\ColorSwitchForm.Designer.puml
+!include .\\.\Programming\UI\FigureSwitchForm.puml
+!include .\\.\Programming\UI\FigureSwitchForm.Designer.puml
+!include .\\.\Programming\UI\MainForm.puml
+!include .\\.\Programming\UI\MainForm.Designer.puml
+!include .\\.\Programming\obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.puml
+@enduml

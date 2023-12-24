@@ -1,0 +1,9 @@
+@startuml
+class IniFileManager {
+    - <<readonly>> _filePath : string
+    + IniFileManager(filePath:string)
+    + FileExists() : bool
+    + WriteIniFile(section:Config.Sections, key:string, obj:object) : void
+    + ReadIniFile(section:Config.Sections, key:string) : string
+}
+@enduml

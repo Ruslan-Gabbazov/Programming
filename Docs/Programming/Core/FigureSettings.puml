@@ -1,0 +1,11 @@
+@startuml
+class DefaultSettings <<static>> {
+    + <<const>> K : int = 3
+    + <<const>> MaxAngle : double
+    + <<const>> MinAngle : double = 0
+    + <<const>> PointCount : int = 1000
+}
+DefaultSettings o-> "TrajectoryColor" Color
+DefaultSettings o-> "FigureColor" Color
+DefaultSettings o-> "FieldColor" Color
+@enduml

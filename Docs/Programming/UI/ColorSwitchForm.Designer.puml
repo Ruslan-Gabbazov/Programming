@@ -1,0 +1,7 @@
+@startuml
+class ColorSwitchForm <<partial>> {
+    # <<override>> Dispose(disposing:bool) : void
+    - InitializeComponent() : void
+}
+ColorSwitchForm o-> "components" IContainer
+@enduml

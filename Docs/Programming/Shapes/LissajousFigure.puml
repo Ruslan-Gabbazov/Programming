@@ -1,0 +1,17 @@
+@startuml
+class LissajousFigure {
+    - <<readonly>> _k : int
+    - <<readonly>> _maxAngle : double
+    - <<readonly>> _minAngle : double
+    - <<readonly>> _pointCount : int
+    - <<readonly>> _step : double
+    - _fi : double
+    + LissajousFigure()
+    + Radius : int <<get>> <<set>>
+    + Scale : double <<get>> <<set>>
+    - GetPointValue(fi:double) : Point
+    + GetPoints() : Point[]
+    + GetNextPoint(step:double) : Point
+}
+LissajousFigure --> "Center" Point
+@enduml

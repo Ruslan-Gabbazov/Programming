@@ -1,0 +1,13 @@
+@startuml
+class MovingFigureTrajectory {
+    + FigureScale : double <<get>> <<set>>
+    + FigureBreathSpeed : double <<get>> <<set>>
+    - _fi : double
+    + MovingFigureTrajectory(characteristicPoints:Point[])
+    - SetAbsolutePoints(fi:double) : void
+    - Breathe() : void
+    + <<new>> Draw(paintBox:PictureBox, e:PaintEventArgs) : void
+}
+MovingPointTrajectory <|-- MovingFigureTrajectory
+MovingFigureTrajectory o-> "Color" Color
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class ColorSwitchForm <<partial>> {
+    + ColorSwitchForm()
+    - ColorSwitchTrajectoryButton_Click(sender:object, e:EventArgs) : void
+    - ColorSwitchFigureButton_Click(sender:object, e:EventArgs) : void
+    - ColorSwitchFieldButton_Click(sender:object, e:EventArgs) : void
+    - ResetColorsButton_Click(sender:object, e:EventArgs) : void
+}
+Form <|-- ColorSwitchForm
+@enduml
